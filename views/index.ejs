@@ -24,15 +24,12 @@
                                 <p class="card-text"><%= post.content %></p>
                             </div>
                         </div>
-                        <% if(!post.author._id.equals(isLogged)){%>
+                        <% if(!post.author._id.equals(isLogged) ){%>
                             <form action="/auth/follow<%=post.author._id%>?_method=PUT" method="POST" class="text-center mt-3">
-                                <%if(post.author.follow){ %>
-                                    <button class="btn  btn-outline btn-lg rounded-0 changeBtn " type="submit">Follow</button>
-                                <%} else{%>
-                                    <button class="btn  btn-outline btn-lg rounded-0 changeBtn " type="submit">UnFollow</button>
-                                <% } %>  
+                                <%  const action = user.following.includes(post.author._id) ? 'unfollow' : 'follow'; %>
+                                    <button class="btn  btn-outline btn-lg rounded-0 changeBtn " type="submit"><%=action %></button>
                             </form>  
-                        <%} %>  
+                        <%} %>
                     </div>
                 </div>
             </div>

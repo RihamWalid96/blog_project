@@ -1,11 +1,14 @@
 const Post=require('../models/PostModel')
+const {User} = require("../models/authModel");
 
 const getAll = async (req, res,next) => {
   try{
       const Allposts = await Post.find({}).populate('author')
+      const user = await User.findById(req.session.userId)
       res.render('index',{
         posts:Allposts,
-        isLogged:req.session.userId
+        isLogged:req.session.userId,
+        user:user
       }); 
   }catch(e){
      next(e)
